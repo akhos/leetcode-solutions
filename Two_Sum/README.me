@@ -1,0 +1,18 @@
+# LeetCode Problem: Two Sum
+
+## Problem Description
+[Link to problem](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/?envType=study-plan-v2&envId=top-interview-150)
+Difficulty: Medium
+
+## Solution
+set a pointer initially to the leftmost element of the list (index 0) and another pointer to the rightmost element of the list; 
+if the sum of these two numbers is larger than target, we need to move the right pointer to the left to make the sum smaller. 
+(because the elements are sorted)
+If the sum of these two numbers is smaller than the target, we need to move the left pointer to the right to make the sum larger.
+We move the pointers untill we find two elements which add up to the target.
+
+## Time and Space Complexity
+Time Complexity: O(n) when the n is the length of the list
+Space Complexity: O(1)
+
+## Special cases to test
