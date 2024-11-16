@@ -1,0 +1,53 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:
+        if head == None or head.next == None:
+            return head
+        counter = 1
+        beforeLeft = ListNode()
+        beforeLeft.next = head
+        while counter  < left:
+            counter+=1
+            beforeLeft = beforeLeft.next
+        justRight = beforeLeft.next
+        while counter < right:
+            justRight = justRight.next
+            counter+=1
+        
+        afterRight = justRight.next
+        justRight.next = None
+        #rev = self.getRecReverse(beforeLeft.next)
+        rev = self.iterReverse(beforeLeft.next)
+        if beforeLeft.next == head:
+            head = rev
+        else:
+            beforeLeft.next = rev
+        while rev.next != None:
+            rev = rev.next
+        rev.next = afterRight
+        return head
+    def getRecReverse(self, head: Optional[ListNode])-> Optional[ListNode]:
+        if head == None or head.next == None:
+            return head
+        revList = self.getRecReverse(head.next)
+        listEnd = revList
+        head.next.next = head
+        head.next = None 
+        return revList
+    def iterReverse(self, head: Optional[ListNode])-> Optional[ListNode]:
+        if head.next == None:
+            return head
+        prev = None
+        curr = head
+        next = curr.next
+        while curr.next != None:
+            curr.next = prev
+            prev = curr
+            curr = next
+            next = curr.next
+        curr.next = prev
+        return curr
